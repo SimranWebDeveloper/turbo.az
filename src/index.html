@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dist/output.css">
+    <title>Document</title>
+</head>
+<body class="bg-zinc-400">
+<header class="header-section  px-12 md:px-24 lg:px-48 bg-red-600   text-white py-4">
+    <div class="container flex   justify-start items-center ">
+        <!-- logo -->
+        <div><a href="" class=" text-2xl font-mono uppercase font-semibold mr-5">turbo.az</a></div>
+        <!-- navlink -->
+        <nav class="hidden lg:block   w-full ">
+            <div class="flex justify-between">
+                <ul class="flex justify-center items-center">
+                    <li class="mr-3 "><a href="">Butun elanlar</a></li>
+                    <li class="mr-3"><a href="">Avtosalonlar</a></li>
+                    <li class="flex justify-center items-center">
+                        <a href="">Moto</a>
+                        <span class="pb-3">
+                            <sup class=" bg-lime-500 rounded-full p-1 pt-0">yeni</sup> 
+                        </span>
+                    </li>
+ 
+                    <li class="mx-3"><a href="">Ehityyat hisseleri ve aksesuarlar</a></li>
+    
+                </ul>
+                <button class="bg-lime-500 rounded-lg px-2 py-2 whitespace-nowrap" onclick="toggleDiv()">
+                    <span class="rounded-full border-2 pb-1 px-2 text-center ">+</span> 
+                    Yeni elanlar
+                </button>
+            </div>
+
+        </nav>
+        <div>
+            <button class="absolute right-10 top-4 block lg:hidden text-2xl " onclick="toggleMenu()">☰</button>
+
+        </div>
+
+
+    </div>
+    <!-- Hamburger menu -->
+    <div class="hidden absolute left-0 top-0 bg-red-600 max-w-fit h-screen p-5  " id="hamDiv" >
+        <ul class=" leading-10 transition-all duration-500 ">
+            <li class="mr-3 text-end"><button onclick="toggleMenu()">╳</button></li>
+            <li class="mr-3"><a href="">Butun elanlar</a></li>
+            <li class="mr-3"><a href="">Avtosalonlar</a></li>
+            <li class="flex justify-start items-center">
+                <a href="">Moto</a>
+                <span class="pb-3">
+                    <sup class=" bg-lime-500 rounded-full p-1 pt-0">yeni</sup> 
+                </span>
+            </li>
+            <li class="mr-3"><a href="">Ehityyat hisseleri ve aksesuarlar</a></li>
+
+        </ul>
+    </div>
+
+</header>
+<main>
+    <div class="container p-5  text-center" id="inputs">
+        <select name="" value="reset" id="marka" class="p-1" aria-placeholder="enter marka" onchange="showModel()">
+            <option disabled selected>Marka</option>
+
+        </select>
+        <select name="" id="model" class="p-1">
+            <option disabled selected>Model</option>
+
+        </select>
+        <input type="text" placeholder="price" id="price" class="my-2 w-1/5 p-1">
+        <input type="text" placeholder="year" id="year" class="my-2 w-1/5 p-1">
+        <input type="text" placeholder="img" id="img" class="my-2 w-1/5 p-1">
+        <input type="text" placeholder="engine" id="engine" class="my-2 w-1/5 p-1">
+        <input type="text" placeholder="color" id="color" class="my-2 w-1/5 p-1">
+        <input type="button" value="Add new car" id="prise" class="my-2 w-1/5 bg-blue-600 text-white p-1" 
+        onclick="createCar()">
+     
+    </div>
+    <div class="container">
+        <div id="allCars" class="flex flex-wrap text-center space-x-4 p-5 ">
+
+            
+            
+        </div>
+    </div>
+</main>
+
+
+
+
+    <script>
+
+        // header
+        let hamDiv=document.getElementById('hamDiv')
+        function toggleMenu() { hamDiv.classList.toggle('hidden')   }
+
+        // main marka model
+        
+        let marka=document.getElementById('marka')
+        let model=document.getElementById('model')
+        marka.style.width='20%'
+        model.style.width='20%'
+
+        let markaArr = ["BMW","Chevrolet","Hyundai","Mitsubisi","Nissan","Toyota"]
+        let modelArr = [
+                ["M1","X5","X6","Z4"],
+                ["Aveo","Cruze","Trax","Maliby","Orlando","Camaro"],
+                ["Elantra","Santafe","Tucson","i30","Sonata"],
+                ["Lancer","Outlander","Pajero","L200"],
+                ["Sunny","Qasqai","Tiida","xTrail","Partol"],
+                ["Prius","Corolla","Prado","Camry","Corona"]
+            ]
+        
+        for (let i = 0; i < markaArr.length; i++) {
+            marka.innerHTML+=`  <option value="${i}">${markaArr[i]}</option> </br> `
+           
+        }
+        function showModel() {
+
+            model.innerHTML=' '
+            let arr=modelArr[marka.value]
+            console.log(arr);
+            let kod=''
+            console.log(marka.value);
+            for (let i = 0; i < arr.length; i++) {
+
+                   kod +=`  <option >${arr[i]}</option> </br> `
+                
+                
+            }model.innerHTML+=kod
+        }
+        // open-close div
+        function toggleDiv() {
+            let inputs=document.getElementById('inputs')
+            console.log(inputs);
+            inputs.classList.toggle('hidden')
+        }
+        // add to card
+        const product= [
+            {
+               price:'70 000$',
+               year:'2018',
+               img:'https://turbo.azstatic.com/uploads/full/2023%2F04%2F19%2F15%2F18%2F15%2Fa342e2a9-4e77-4d84-a7c0-3636485f3829%2F91450_TqI2RRAiBmsCLCVyWGRV1g.jpg',
+               engine:'bmw',
+               color:'black'
+            },
+            {
+               price:'70 000$',
+               year:'2018',
+               img:'https://turbo.azstatic.com/uploads/full/2023%2F08%2F20%2F13%2F38%2F15%2F04167fdc-9137-4023-b6d0-5abb6cec7e88%2F33299_AswP7pyxIkeJVMWTpZhnOA.jpg',
+               engine:'bmw',
+               color:'black'
+            },
+            {
+               price:'70 000$',
+               year:'2018',
+               img:'https://turbo.azstatic.com/uploads/full/2023%2F02%2F08%2F19%2F09%2F59%2F03448047-e4be-44b5-8af6-2d1d8a879f75%2F66582_24BO0nmZYbra6Nsn1Binjg.jpg',
+               engine:'bmw',
+               color:'black'
+            },
+            {
+               price:'70 000$',
+               year:'2018',
+               img:'https://turbo.azstatic.com/uploads/full/2023%2F08%2F25%2F19%2F59%2F39%2F1c2c29a6-70ff-444f-a36f-242074edf957%2F33276_5IB27jCcq_2LK8YxEhsQEQ.jpg',
+               engine:'bmw',
+               color:'black'
+            }
+        ]
+        
+
+        let allCars=document.getElementById('allCars')
+        showCar()
+
+        function CreateObj(marka,model,price,year,img,engine,color) {
+            this.marka=marka,
+            this.model=model,
+            this.price=price,
+            this.year=year,
+            this.img=img,
+            this.engine=engine,
+            this.color=color
+        }
+        //inputs
+        let price=document.getElementById('price')
+        let year=document.getElementById('year')
+        let img=document.getElementById('img')
+        let engine=document.getElementById('engine')
+        let color=document.getElementById('color')
+
+        
+        function createCar() {
+            console.log(price.value);
+            const createObj=new CreateObj(marka.value,model.value,price.value,year.value,img.value,engine.value,color.value)
+            product.push(createObj)
+            showCar()
+        }
+
+        function showCar() {
+            let cars=''
+            allCars.innerHTML=''
+            for (let i = 0; i < product.length; i++) {
+                cars+=`
+                <div class="border-2 border-black  w-72" >
+                    <img src=${product[i].img} alt="" class="h-40 w-full  object-cover">
+                    <div class='border-black p-5'>
+                        <p> <span>Price: </span>${product[i].price}</p>
+                        <p> <span>Year: </span> ${product[i].year}</p>
+                        <p> <span>Engine: </span> ${product[i].engine}</p>
+                        <p> <span>Color: </span> ${product[i].color}</p>
+                    </div>
+
+                </div>
+                `
+            }
+            allCars.innerHTML+=cars
+        }
+
+
+    </script>
+</body>
+</html>
